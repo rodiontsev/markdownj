@@ -400,7 +400,7 @@ public class MarkdownProcessor {
                     
                     public String languageBlock(String firstLine, String text)
                     {
-                        // dont'use %n in format string (markdown aspect every new line char as "\n")
+                        // dont'use %n in format string (markdown expect every new line char as "\n")
                     	//String codeBlockTemplate = "<pre class=\"brush: %s\">%n%s%n</pre>"; // http://alexgorbatchev.com/wiki/SyntaxHighlighter
                         String codeBlockTemplate = "\n\n<pre class=\"%s\">\n%s\n</pre>\n\n"; // http://shjs.sourceforge.net/doc/documentation.html
                         String lang = firstLine.replaceFirst(LANG_IDENTIFIER, "").trim();
@@ -409,7 +409,7 @@ public class MarkdownProcessor {
                     }
                     public String genericCodeBlock(String text)
                     {
-                        // dont'use %n in format string (markdown aspect every new line char as "\n")
+                        // dont'use %n in format string (markdown expect every new line char as "\n")
                     	String codeBlockTemplate = "\n\n<pre><code>%s\n</code></pre>\n\n";
                         return String.format(codeBlockTemplate, text);
                     }
