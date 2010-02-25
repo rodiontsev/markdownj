@@ -59,6 +59,20 @@ public class MarkdownProcessor {
     private int listLevel;
     private String emptyElementSuffix = " />";
     private int tabWidth = 4;
+    
+    /**
+     *  The default code template, used if not overwritten by the client code.
+     *  
+     *  @see http://shjs.sourceforge.net/doc/documentation.html
+     *  
+     *  Other possible template:
+     *  <pre><code>
+     *  	\n\n<pre class=\"brush: %s\">\n%s\n</pre>\n\n
+     *  </code></pre>
+     *  @see http://alexgorbatchev.com/wiki/SyntaxHighlighter
+     */
+    private static final String DEFAULT_CODE_BLOCK_TEMPLATE = "\n\n<pre class=\"%s\">\n%s\n</pre>\n\n";
+    private String codeBlockTemplate = DEFAULT_CODE_BLOCK_TEMPLATE;
 
     /**
      * Creates a new Markdown processor.
@@ -401,8 +415,7 @@ public class MarkdownProcessor {
                     public String languageBlock(String firstLine, String text)
                     {
                         // dont'use %n in format string (markdown expects every new line char as "\n")
-                        //String codeBlockTemplate = "<pre class=\"brush: %s\">%n%s%n</pre>"; // http://alexgorbatchev.com/wiki/SyntaxHighlighter
-                        String codeBlockTemplate = "\n\n<pre class=\"%s\">\n%s\n</pre>\n\n"; // http://shjs.sourceforge.net/doc/documentation.html
+                        String codeBlockTemplate = getCodeBlockTemplate();
                         String lang = firstLine.replaceFirst(LANG_IDENTIFIER, "").trim();
                         String block = text.replaceFirst( firstLine+"\n", "");
                         return String.format(codeBlockTemplate, lang, block);
@@ -834,7 +847,15 @@ public class MarkdownProcessor {
         return ed.toString();
     }
 
-    @Override
+    public String getCodeBlockTemplate() {
+		return codeBlockTemplate;
+	}
+
+	public void setCodeBlockTemplate(String codeBlockTemplate) {
+		this.codeBlockTemplate = codeBlockTemplate;
+	}
+
+	@Override
     public String toString() {
         return "Markdown Processor for Java 0.4.0 (compatible with Markdown 1.0.2b2)";
     }
