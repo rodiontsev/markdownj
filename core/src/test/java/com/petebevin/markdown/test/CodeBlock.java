@@ -35,12 +35,12 @@ software, even if advised of the possibility of such damage.
 
 package com.petebevin.markdown.test;
 
-import com.petebevin.markdown.HTMLDecoder;
-import com.petebevin.markdown.MarkdownProcessor;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
+import com.petebevin.markdown.MarkdownProcessor;
 
 public class CodeBlock {
     MarkdownProcessor m;

@@ -131,7 +131,7 @@ public class MarkupFileTester {
         return list;
     }
 
-    private static void addTestResultPair(List list, StringBuffer testbuf, StringBuffer resultbuf, String testNumber, String testName) {
+    private static void addTestResultPair(List<TestResultPair> list, StringBuffer testbuf, StringBuffer resultbuf, String testNumber, String testName) {
         if (testbuf == null || resultbuf == null) {
             return;
         }

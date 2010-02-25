@@ -61,7 +61,7 @@ public class MarkdownTestTester {
 
     @Parameters
     public static Collection<Object[]> markdownTests() {
-        List list = new ArrayList<Object[]>();
+        List<Object[]> list = new ArrayList<Object[]>();
         URL fileUrl = MarkdownTestTester.class.getResource(MARKDOWN_TEST_DIR);
         File dir = new File(fileUrl.getFile());
         File[] dirEntries = dir.listFiles();
