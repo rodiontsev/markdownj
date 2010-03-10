@@ -99,7 +99,7 @@ public class TextEditor {
      */
     public TextEditor replaceAllLiteral(String regex, final String replacement) {
         return replaceAll(Pattern.compile(regex, Pattern.MULTILINE), new Replacement() {
-            public String replacement(Matcher m) {
+            public String replacement(@SuppressWarnings("unused") Matcher m) {
                 return replacement;
             }
         });
