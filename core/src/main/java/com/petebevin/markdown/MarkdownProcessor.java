@@ -328,7 +328,7 @@ public class MarkdownProcessor {
                 sb.append(';');
             } else if (r < 0.9) {  // Hex
                 sb.append("&#x");
-                sb.append(Integer.toString((int) ch, 16));
+                sb.append(Integer.toString(ch, 16));
                 sb.append(';');
             } else {
                 sb.append(ch);
