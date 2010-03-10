@@ -258,9 +258,8 @@ public class TextEditor {
     private String nestedTagsRegex(int depth) {
         if (depth == 0) {
             return "";
-        } else {
-            return "(?:<[a-z/!$](?:[^<>]|" + nestedTagsRegex(depth - 1) + ")*>)";
-        }
+        } 
+        return "(?:<[a-z/!$](?:[^<>]|" + nestedTagsRegex(depth - 1) + ")*>)";
     }
 
     /**
