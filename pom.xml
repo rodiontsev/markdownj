@@ -37,10 +37,10 @@ software, even if advised of the possibility of such damage.
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.markdownj</groupId>
+    <groupId>com.github.enr.markdownj</groupId>
     <artifactId>markdownj</artifactId>
     <packaging>pom</packaging>
-    <version>0.4-SNAPSHOT</version>
+    <version>0.4.20100508</version>
 
     <name>MarkdownJ</name>
     <url>http://markdownj.org/</url>
