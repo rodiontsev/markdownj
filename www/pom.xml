@@ -5,7 +5,7 @@
   <parent>
       <groupId>com.github.enr.markdownj</groupId>
       <artifactId>markdownj</artifactId>
-      <version>0.4.M20100509</version>
+      <version>0.4-SNAPSHOT</version>
       <relativePath>../pom.xml</relativePath>
   </parent>
 
