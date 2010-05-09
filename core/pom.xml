@@ -38,9 +38,9 @@ software, even if advised of the possibility of such damage.
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.markdownj</groupId>
+        <groupId>com.github.enr.markdownj</groupId>
         <artifactId>markdownj</artifactId>
-        <version>0.4-SNAPSHOT</version>
+        <version>0.4.M20100509</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
