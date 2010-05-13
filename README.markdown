@@ -9,7 +9,9 @@ Differences:
 
   * Milestone releases to remove the need for a 'SNAPSHOT' dependency. 
 
-  * It's possible set the code-block template in MarkdownProcessor.
+  * You can set the code-block template in MarkdownProcessor.
+  
+  * You can set the additional characters you want escaped in the html rendering.
 
 To build the last milestone (from commits to May 9 2010):
 

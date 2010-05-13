@@ -35,11 +35,13 @@ software, even if advised of the possibility of such damage.
 
 package com.petebevin.markdown;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
 
 
 /**
@@ -279,5 +281,36 @@ public class TextEditor {
      */
     public boolean isEmpty() {
         return text.length() == 0;
+    }
+
+    public void htmlize(Map<Character, String> htmlEntities)
+    {
+        o("                 htmlEntities           "+htmlEntities);
+        char[] dst = new char[text.length()];
+        text.getChars(0, text.length(), dst, 0);
+        o(String.format("TL    %d     ", text.length()));
+        int i = 0;
+        for (char cn: dst)
+        {
+            o(String.format("1 i = %d    ", i));
+            String escaped = htmlEntities.get(Character.valueOf(cn));
+            o(String.format("    %d     %s       %s", i, cn, escaped));
+            if (escaped != null) {
+                text.replace(i, i+1, escaped);
+                o(String.format("2 i = %d    ", i));
+                i = i+(escaped.length());
+                o(String.format("3 i = %d    ", i));
+            } else {
+                i++;
+            }
+            o(String.format("4 i = %d    ", i));
+        }
+        
+    }
+    
+    private void o(String m) {
+        if (text.toString().startsWith("AAAA")) {
+            System.out.println(m);
+        }
     }
 }

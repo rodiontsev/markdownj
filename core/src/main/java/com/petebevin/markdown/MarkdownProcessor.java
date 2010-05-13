@@ -73,6 +73,12 @@ public class MarkdownProcessor {
      */
     private static final String DEFAULT_CODE_BLOCK_TEMPLATE = "\n\n<pre class=\"%s\">\n%s\n</pre>\n\n";
     private String codeBlockTemplate = DEFAULT_CODE_BLOCK_TEMPLATE;
+    
+    /**
+     * A map of values to be replaced in html transformation.
+     * The key is the char, the value the string to use in replacement, ie '�' : '&agrave;'.
+     */
+    private Map<Character, String> htmlEntities;
 
     /**
      * Creates a new Markdown processor.
@@ -146,7 +152,7 @@ public class MarkdownProcessor {
         text.replaceAll(p, new Replacement() {
             public String replacement(Matcher m) {
                 String id = m.group(1).toLowerCase();
-                String url = encodeAmpsAndAngles(new TextEditor(m.group(2))).toString();
+                String url = encodeAmpsAnglesAndEntities(new TextEditor(m.group(2))).toString();
                 String title = m.group(3);
 
                 if (title == null) {
@@ -643,7 +649,7 @@ public class MarkdownProcessor {
         // - Nathan Winant, nw@exegetic.net, 8/29/2006
         text = escapeSpecialCharsWithinTagAttributes(text);
 
-        encodeAmpsAndAngles(text);
+        encodeAmpsAnglesAndEntities(text);
         doItalicsAndBold(text);
 
         // Manual line breaks
@@ -812,11 +818,21 @@ public class MarkdownProcessor {
         return markup;
     }
 
-    private TextEditor encodeAmpsAndAngles(TextEditor markup) {
+    /**
+     * Was private TextEditor encodeAmpsAndAngles(TextEditor markup):
+     * Name was generalized after the add of markup.htmlize() line.
+     * 
+     * @param markup
+     *
+     */
+    private TextEditor encodeAmpsAnglesAndEntities(TextEditor markup) {
         // Ampersand-encoding based entirely on Nat Irons's Amputator MT plugin:
         // http://bumppo.net/projects/amputator/
         markup.replaceAll("&(?!#?[xX]?(?:[0-9a-fA-F]+|\\w+);)", "&amp;");
         markup.replaceAll("<(?![a-z/?\\$!])", "&lt;");
+        if (htmlEntities != null) {
+            markup.htmlize(htmlEntities);
+        }
         return markup;
     }
 
@@ -877,5 +893,15 @@ public class MarkdownProcessor {
             System.err.println("Error reading input: " + e.getMessage());
             System.exit(1);
         }
+    }
+
+    public Map<Character, String> getHtmlEntities()
+    {
+        return htmlEntities;
+    }
+
+    public void setHtmlEntities(Map<Character, String> htmlEntities)
+    {
+        this.htmlEntities = htmlEntities;
     }
 }

@@ -297,3 +297,11 @@ This is a normal paragraph.
 This is a $4 preformatted
 code block.
 </code></pre>
+
+
+# Test 17 (html entities default behaviour)
+This ààà, no substitutions
+
+# Result 17
+<p>This ààà, no substitutions</p>
+
