@@ -76,7 +76,16 @@ public class HtmlEntitiesEncoding {
     @Test
     public void testHtmlEntities() {
         String md = "I paid 2 £ this nòrmal paragraph & <àccènts>!";
-        String expected = "<p>I paid 2 &#163; this n&#242;rmal paragraph &amp; &lt;&#224;cc&#232;nts&#62;!</p>\n";
+        String expected = "<p>I paid 2 &#163; this n&#242;rmal paragraph &#38; &#60;&#224;cc&#232;nts&#62;!</p>\n";
+        m.setHtmlEntities(Entities.HTML_401);
+        String html = m.markdown(md);
+        assertEquals(expected, html);
+    }
+
+    @Test
+    public void testCodeBlock() {
+        String md = "fìrst linè\n\n\tthìs ìs còd&\n";
+        String expected = "<p>f&#236;rst lin&#232;</p>\n\n<pre><code>th&#236;s &#236;s c&#242;d&#38;\n</code></pre>\n";
         m.setHtmlEntities(Entities.HTML_401);
         String html = m.markdown(md);
         assertEquals(expected, html);

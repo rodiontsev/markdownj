@@ -6,13 +6,15 @@ import java.util.Map;
 public interface Entities
 {
     /**
-     * A map of HTML 4.01 entities, taken from W3C website, without the ampersand and
-     * less-than chars (processed apart from Markdown processor).
+     * A map of HTML 4.01 entities, taken from W3C website.
      * 
      * @see http://www.w3.org/TR/html401/sgml/entities.html
      */
     public static final Map<Character, String> HTML_401 = new HashMap<Character, String>() {
         {
+            put(Character.valueOf((char) 38), "&#38;"); // ampersand
+            put(Character.valueOf((char) 60), "&#60;"); // less-than
+            put(Character.valueOf((char) 62), "&#62;"); // greater-than
             put(Character.valueOf((char) 160), "&#160;");
             put(Character.valueOf((char) 161), "&#161;");
             put(Character.valueOf((char) 162), "&#162;");
@@ -234,9 +236,6 @@ public interface Entities
             put(Character.valueOf((char) 9829), "&#9829;");
             put(Character.valueOf((char) 9830), "&#9830;");
             put(Character.valueOf((char) 34), "&#34;");
-            //put(Character.valueOf((char) 38), "&#38;"); // ampersand
-            //put(Character.valueOf((char) 60), "&#60;"); // less-than
-            put(Character.valueOf((char) 62), "&#62;"); // greater-than
             put(Character.valueOf((char) 338), "&#338;");
             put(Character.valueOf((char) 339), "&#339;");
             put(Character.valueOf((char) 352), "&#352;");
@@ -267,4 +266,5 @@ public interface Entities
             put(Character.valueOf((char) 8364), "&#8364;");
         }
     };
+
 }

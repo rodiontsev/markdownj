@@ -436,9 +436,13 @@ public class MarkdownProcessor {
     }
 
     private void encodeCode(TextEditor ed) {
-        ed.replaceAll("&", "&amp;");
-        ed.replaceAll("<", "&lt;");
-        ed.replaceAll(">", "&gt;");
+        if (htmlEntities != null) {
+            ed.htmlize(htmlEntities);
+        } else {
+            ed.replaceAll("&", "&amp;");
+            ed.replaceAll("<", "&lt;");
+            ed.replaceAll(">", "&gt;");
+        }
         ed.replaceAll("\\*", CHAR_PROTECTOR.encode("*"));
         ed.replaceAll("_", CHAR_PROTECTOR.encode("_"));
         ed.replaceAll("\\{", CHAR_PROTECTOR.encode("{"));
@@ -826,13 +830,14 @@ public class MarkdownProcessor {
      *
      */
     private TextEditor encodeAmpsAnglesAndEntities(TextEditor markup) {
-        // Ampersand-encoding based entirely on Nat Irons's Amputator MT plugin:
-        // http://bumppo.net/projects/amputator/
-        markup.replaceAll("&(?!#?[xX]?(?:[0-9a-fA-F]+|\\w+);)", "&amp;");
-        markup.replaceAll("<(?![a-z/?\\$!])", "&lt;");
         if (htmlEntities != null) {
             markup.htmlize(htmlEntities);
         }
+        // Ampersand-encoding based entirely on Nat Irons's Amputator MT plugin:
+        // http://bumppo.net/projects/amputator/
+        // Amputator is smart enough to ignore ampersands attached to existing entities
+        markup.replaceAll("&(?!#?[xX]?(?:[0-9a-fA-F]+|\\w+);)", "&amp;");
+        markup.replaceAll("<(?![a-z/?\\$!])", "&lt;");
         return markup;
     }
 
