@@ -66,8 +66,8 @@ public class HtmlEntitiesEncoding {
     public void testHtmlEntitiesCustomSetting() {
         Map<Character, String> htmlEntities = new HashMap<Character, String>();
         htmlEntities.put(Character.valueOf((char)224), "&agrave;");
-        String md = "This is a normal paragraph with àccènts!";
-        String expected = "<p>This is a normal paragraph with &agrave;ccènts!</p>\n";
+        String md = "This is a normal paragraph & àccènts!";
+        String expected = "<p>This is a normal paragraph &amp; &agrave;ccènts!</p>\n";
     	m.setHtmlEntities(htmlEntities);
     	String html = m.markdown(md);
         assertEquals(expected, html);
@@ -75,8 +75,8 @@ public class HtmlEntitiesEncoding {
 
     @Test
     public void testHtmlEntities() {
-        String md = "I paid 2 £ this nòrmal paragraph with àccènts!";
-        String expected = "<p>I paid 2 &#163; this n&#242;rmal paragraph with &#224;cc&#232;nts!</p>\n";
+        String md = "I paid 2 £ this nòrmal paragraph & <àccènts>!";
+        String expected = "<p>I paid 2 &#163; this n&#242;rmal paragraph &amp; &lt;&#224;cc&#232;nts&#62;!</p>\n";
         m.setHtmlEntities(Entities.HTML_401);
         String html = m.markdown(md);
         assertEquals(expected, html);

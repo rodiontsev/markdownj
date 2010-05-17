@@ -6,7 +6,8 @@ import java.util.Map;
 public interface Entities
 {
     /**
-     * A map of HTML 4.01 entities, taken from W3C website.
+     * A map of HTML 4.01 entities, taken from W3C website, without the ampersand and
+     * less-than chars (processed apart from Markdown processor).
      * 
      * @see http://www.w3.org/TR/html401/sgml/entities.html
      */
@@ -233,9 +234,9 @@ public interface Entities
             put(Character.valueOf((char) 9829), "&#9829;");
             put(Character.valueOf((char) 9830), "&#9830;");
             put(Character.valueOf((char) 34), "&#34;");
-            put(Character.valueOf((char) 38), "&#38;");
-            put(Character.valueOf((char) 60), "&#60;");
-            put(Character.valueOf((char) 62), "&#62;");
+            //put(Character.valueOf((char) 38), "&#38;"); // ampersand
+            //put(Character.valueOf((char) 60), "&#60;"); // less-than
+            put(Character.valueOf((char) 62), "&#62;"); // greater-than
             put(Character.valueOf((char) 338), "&#338;");
             put(Character.valueOf((char) 339), "&#339;");
             put(Character.valueOf((char) 352), "&#352;");
