@@ -15,7 +15,7 @@ Differences:
 
 To build the last milestone (from commits to May 9 2010):
 
-    git clone git://github.com/enr/markdownj-extras.git
+    git clone git://github.com/enr/markdownj.git
     git checkout 0.4.M20100509
     mvn clean install
     
