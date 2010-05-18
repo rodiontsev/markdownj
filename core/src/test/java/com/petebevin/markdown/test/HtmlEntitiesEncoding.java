@@ -90,4 +90,12 @@ public class HtmlEntitiesEncoding {
         String html = m.markdown(md);
         assertEquals(expected, html);
     }
+    @Test
+    public void testAdvancedSyntaxAndStrictHtmlEncoding() {
+        String md = "Another <http://example.tld> link";
+        String expected = "<p>Another <a href=\"http://example.tld\">http://example.tld</a> link</p>";
+        m.setHtmlEntities(Entities.HTML_401);
+        String html = m.markdown(md);
+        assertEquals(expected, html);
+    }
 }
