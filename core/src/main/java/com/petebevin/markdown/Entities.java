@@ -8,6 +8,7 @@ public class Entities
     /**
      * A map of HTML 4.01 entities, taken from W3C website, without 
      * chars used in tags such as greater-than, less-than, ampersand and quotation mark.
+     * This is the recommended map to use for a standard markdown use.
      * 
      * @see http://www.w3.org/TR/html401/sgml/entities.html
      */
@@ -280,7 +281,6 @@ public class Entities
 
     public static String encode(String text, Map<Character, String> entities)
     {
-        o(text);
         char[] dst = new char[text.length()];
         text.getChars(0, text.length(), dst, 0);
         int i = 0;
@@ -288,7 +288,6 @@ public class Entities
         {
             String escaped = entities.get(Character.valueOf(cn));
             if (escaped != null) {
-                //text.replace(i, i+1, escaped);
                 text = replaceCharAt(text, i, escaped);
                 i = i+(escaped.length());
             } else {
@@ -319,11 +318,5 @@ public class Entities
     private static String replaceCharAt(String s, int pos, String replacement) {
         return s.substring(0,pos) + replacement + s.substring(pos+1);
     }
-    
-    public static void o(String message)
-    {
-        if (message.contains("XXX")) {
-            System.out.println("E) "+message);
-        }
-    }
+
 }

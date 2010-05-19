@@ -284,12 +284,7 @@ public class TextEditor {
 
     public void htmlize(Map<Character, String> htmlEntities)
     {
-        o(String.format("htmlize %s", text.toString()));
         text = Entities.encode(text, htmlEntities);
     }
-    
-    public static void o(String message)
-    {
-        if (message.contains("XXX")) System.out.println("T) "+message);
-    }
+
 }

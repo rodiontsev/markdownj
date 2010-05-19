@@ -167,7 +167,6 @@ public class MarkdownProcessor {
     }
 
     public TextEditor runBlockGamut(TextEditor text) {
-        o(String.format("   runBlockGamut %s", text.toString()));
         doHeaders(text);
         doHorizontalRules(text);
         doLists(text);
@@ -295,11 +294,9 @@ public class MarkdownProcessor {
                 paragraphs[i] = decoded;
             } else {
                 paragraph = runSpanGamut(new TextEditor(paragraph)).toString();
-                o(String.format("   paragraph %s", paragraph));
                 if (htmlEntities != null) {
                     paragraph = Entities.encode(paragraph, htmlEntities);
                 }
-                o(String.format("   paragraph %s", paragraph));
                 paragraphs[i] = "<p>" + paragraph + "</p>";
             }
         }
@@ -308,7 +305,6 @@ public class MarkdownProcessor {
 
 
     private TextEditor doAutoLinks(TextEditor markup) {
-        o(String.format("   doAutoLinks %s", markup.toString()));
         markup.replaceAll("<((https?|ftp):[^'\">\\s]+)>", "<a href=\"$1\">$1</a>");
         Pattern email = Pattern.compile("<([-.\\w]+\\@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)>");
         markup.replaceAll(email, new Replacement() {
@@ -918,9 +914,5 @@ public class MarkdownProcessor {
     {
         this.htmlEntities = htmlEntities;
     }
-    
-    public static void o(String message)
-    {
-        if (message.contains("XXX")) System.out.println("M) "+message);
-    }
+
 }

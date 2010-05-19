@@ -37,16 +37,10 @@ package com.petebevin.markdown.test;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,16 +51,19 @@ import com.petebevin.markdown.Entities;
 import com.petebevin.markdown.MarkdownProcessor;
 
 @RunWith(value = Parameterized.class)
-public class SpecialCharsMarkupFileTester {
+public class SpecialCharsMarkupFileTester extends AbstractMarkupFileTester {
 
-    private final static String[] TEST_FILENAMES = new String[] {
-        //"/dingus.txt",
-        //"/paragraphs.txt",
-        "/snippets-sc.txt"
-        //"/lists.txt"
+    protected final static String[] TEST_FILENAMES = new String[] {
+        "/dingus-sc.txt",
+        "/snippets-sc.txt",
+        "/lists-sc.txt"
     };
 
-    TestResultPair pair;
+    public SpecialCharsMarkupFileTester(TestResultPair pair) {
+        super(pair);
+        this.pair = pair;
+    }
+
 
     @Parameters
     public static Collection<Object[]> testResultPairs() throws IOException {
@@ -81,81 +78,7 @@ public class SpecialCharsMarkupFileTester {
         }
         return testResultPairs;
     }
-
-    public SpecialCharsMarkupFileTester(TestResultPair pair) {
-        this.pair = pair;
-    }
-
-    public static List<TestResultPair> newTestResultPairList(String filename) throws IOException {
-        List<TestResultPair> list = new ArrayList<TestResultPair>();
-        URL fileUrl = SpecialCharsMarkupFileTester.class.getResource(filename);
-        InputStreamReader file = new InputStreamReader(new FileInputStream(fileUrl.getFile()), "UTF-8");
-        BufferedReader in = new BufferedReader(file);
-        StringBuffer test = null;
-        StringBuffer result = null;
-
-        Pattern pTest = Pattern.compile("# Test (\\w+) \\((.*)\\)");
-        Pattern pResult = Pattern.compile("# Result (\\w+)");
-        String line;
-        int lineNumber = 0;
-
-        String testNumber = null;
-        String testName = null;
-        StringBuffer curbuf = null;
-        while ((line = in.readLine()) != null) {
-            lineNumber++;
-            Matcher mTest = pTest.matcher(line);
-            Matcher mResult = pResult.matcher(line);
-
-            if (mTest.matches()) { // # Test
-                addTestResultPair(list, test, result, testNumber, testName);
-                testNumber = mTest.group(1);
-                testName = mTest.group(2);
-                test = new StringBuffer();
-                result = new StringBuffer();
-                curbuf = test;
-            } else if (mResult.matches()) { // # Result
-                if (testNumber == null) {
-                    throw new RuntimeException("Test file has result without a test (line " + lineNumber + ")");
-                }
-                String resultNumber = mResult.group(1);
-                if (!testNumber.equals(resultNumber)) {
-                    throw new RuntimeException("Result " + resultNumber + " test " + testNumber + " (line " + lineNumber + ")");
-                }
-
-                curbuf = result;
-            } else {
-                curbuf.append(line);
-                curbuf.append("\n");
-            }
-        }
-
-        addTestResultPair(list, test, result, testNumber, testName);
-
-        return list;
-    }
-
-    private static void addTestResultPair(List<TestResultPair> list, StringBuffer testbuf, StringBuffer resultbuf, String testNumber, String testName) {
-        if (testbuf == null || resultbuf == null) {
-            return;
-        }
-
-        String test = chomp(testbuf.toString());
-        String result = chomp(resultbuf.toString());
-
-        String id = testNumber + "(" + testName + ")";
-
-        list.add(new TestResultPair(id, test, result));
-    }
-
-    private static String chomp(String s) {
-        int lastPos = s.length() - 1;
-        while (s.charAt(lastPos) == '\n' || s.charAt(lastPos) == '\r') {
-            lastPos--;
-        }
-        return s.substring(0, lastPos + 1);
-    }
-
+    
     @Test
     public void runTest() {
         MarkdownProcessor markup = new MarkdownProcessor();
