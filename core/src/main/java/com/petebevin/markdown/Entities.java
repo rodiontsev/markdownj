@@ -6,16 +6,13 @@ import java.util.Map;
 public class Entities
 {
     /**
-     * A map of HTML 4.01 entities, taken from W3C website.
+     * A map of HTML 4.01 entities, taken from W3C website, without 
+     * chars used in tags such as greater-than, less-than, ampersand and quotation mark.
      * 
      * @see http://www.w3.org/TR/html401/sgml/entities.html
      */
-    public static final Map<Character, String> HTML_401 = new HashMap<Character, String>() {
+    public static final Map<Character, String> HTML_401_NO_TAG = new HashMap<Character, String>() {
         {
-            //put(Character.valueOf((char) 34), "&#34;"); // quotation mark
-            //put(Character.valueOf((char) 38), "&#38;"); // ampersand
-            //put(Character.valueOf((char) 60), "&#60;"); // less-than
-            //put(Character.valueOf((char) 62), "&#62;"); // greater-than
             put(Character.valueOf((char) 160), "&#160;");
             put(Character.valueOf((char) 161), "&#161;");
             put(Character.valueOf((char) 162), "&#162;");
@@ -266,7 +263,21 @@ public class Entities
             put(Character.valueOf((char) 8364), "&#8364;");
         }
     };
-    
+
+    /**
+     * Full map of HTML 4.01 entities, taken from W3C website.
+     * 
+     * @see http://www.w3.org/TR/html401/sgml/entities.html
+     */
+    public static final Map<Character, String> HTML_401 = new HashMap<Character, String>(HTML_401_NO_TAG) {
+        {
+            put(Character.valueOf((char) 34), "&#34;"); // quotation mark
+            put(Character.valueOf((char) 38), "&#38;"); // ampersand
+            put(Character.valueOf((char) 60), "&#60;"); // less-than
+            put(Character.valueOf((char) 62), "&#62;"); // greater-than
+        }
+    };
+
     public static String encode(String text, Map<Character, String> entities)
     {
         o(text);

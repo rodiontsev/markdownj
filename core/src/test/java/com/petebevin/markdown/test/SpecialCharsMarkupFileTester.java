@@ -159,7 +159,7 @@ public class SpecialCharsMarkupFileTester {
     @Test
     public void runTest() {
         MarkdownProcessor markup = new MarkdownProcessor();
-        markup.setHtmlEntities(Entities.HTML_401);
+        markup.setHtmlEntities(Entities.HTML_401_NO_TAG);
         assertEquals(pair.toString(), pair.getResult().trim(), markup.markdown(pair.getTest()).trim());
     }
 }

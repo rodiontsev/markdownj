@@ -77,7 +77,7 @@ public class HtmlEntitiesEncoding {
     public void testHtmlEntities() {
         String md = "XXXI paid 2 £ this nòrmal paragraph & <àccènts>!";
         String expected = "<p>XXXI paid 2 &#163; this n&#242;rmal paragraph &amp; &lt;&#224;cc&#232;nts>!</p>\n";
-        m.setHtmlEntities(Entities.HTML_401);
+        m.setHtmlEntities(Entities.HTML_401_NO_TAG);
         String html = m.markdown(md);
         assertEquals(expected, html);
     }
@@ -86,7 +86,7 @@ public class HtmlEntitiesEncoding {
     public void testCodeBlock() {
         String md = "fìrst linè\n\n\tthìs ìs còde\n";
         String expected = "<p>f&#236;rst lin&#232;</p>\n\n<pre><code>th&#236;s &#236;s c&#242;de\n</code></pre>\n";
-        m.setHtmlEntities(Entities.HTML_401);
+        m.setHtmlEntities(Entities.HTML_401_NO_TAG);
         String html = m.markdown(md);
         assertEquals(expected, html);
     }
@@ -94,7 +94,7 @@ public class HtmlEntitiesEncoding {
     public void testAdvancedSyntaxAndStrictHtmlEncoding() {
         String md = "XXXAnother <http://example.tld> link";
         String expected = "<p>XXXAnother <a href=\"http://example.tld\">http://example.tld</a> link</p>\n";
-        m.setHtmlEntities(Entities.HTML_401);
+        m.setHtmlEntities(Entities.HTML_401_NO_TAG);
         String html = m.markdown(md);
         assertEquals(expected, html);
     }
