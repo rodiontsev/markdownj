@@ -3,7 +3,7 @@ package com.petebevin.markdown;
 import java.util.HashMap;
 import java.util.Map;
 
-public interface Entities
+public class Entities
 {
     /**
      * A map of HTML 4.01 entities, taken from W3C website.
@@ -12,9 +12,10 @@ public interface Entities
      */
     public static final Map<Character, String> HTML_401 = new HashMap<Character, String>() {
         {
-            put(Character.valueOf((char) 38), "&#38;"); // ampersand
-            put(Character.valueOf((char) 60), "&#60;"); // less-than
-            put(Character.valueOf((char) 62), "&#62;"); // greater-than
+            //put(Character.valueOf((char) 34), "&#34;"); // quotation mark
+            //put(Character.valueOf((char) 38), "&#38;"); // ampersand
+            //put(Character.valueOf((char) 60), "&#60;"); // less-than
+            //put(Character.valueOf((char) 62), "&#62;"); // greater-than
             put(Character.valueOf((char) 160), "&#160;");
             put(Character.valueOf((char) 161), "&#161;");
             put(Character.valueOf((char) 162), "&#162;");
@@ -79,7 +80,7 @@ public interface Entities
             put(Character.valueOf((char) 221), "&#221;");
             put(Character.valueOf((char) 222), "&#222;");
             put(Character.valueOf((char) 223), "&#223;");
-            put(Character.valueOf((char) 224), "&#224;");
+            put(Character.valueOf((char) 224), "&#224;");   // agrave
             put(Character.valueOf((char) 225), "&#225;");
             put(Character.valueOf((char) 226), "&#226;");
             put(Character.valueOf((char) 227), "&#227;");
@@ -87,7 +88,7 @@ public interface Entities
             put(Character.valueOf((char) 229), "&#229;");
             put(Character.valueOf((char) 230), "&#230;");
             put(Character.valueOf((char) 231), "&#231;");
-            put(Character.valueOf((char) 232), "&#232;");
+            put(Character.valueOf((char) 232), "&#232;");   // egrave
             put(Character.valueOf((char) 233), "&#233;");
             put(Character.valueOf((char) 234), "&#234;");
             put(Character.valueOf((char) 235), "&#235;");
@@ -97,7 +98,7 @@ public interface Entities
             put(Character.valueOf((char) 239), "&#239;");
             put(Character.valueOf((char) 240), "&#240;");
             put(Character.valueOf((char) 241), "&#241;");
-            put(Character.valueOf((char) 242), "&#242;");
+            put(Character.valueOf((char) 242), "&#242;");   // ograve
             put(Character.valueOf((char) 243), "&#243;");
             put(Character.valueOf((char) 244), "&#244;");
             put(Character.valueOf((char) 245), "&#245;");
@@ -235,7 +236,6 @@ public interface Entities
             put(Character.valueOf((char) 9827), "&#9827;");
             put(Character.valueOf((char) 9829), "&#9829;");
             put(Character.valueOf((char) 9830), "&#9830;");
-            put(Character.valueOf((char) 34), "&#34;");
             put(Character.valueOf((char) 338), "&#338;");
             put(Character.valueOf((char) 339), "&#339;");
             put(Character.valueOf((char) 352), "&#352;");
@@ -266,5 +266,53 @@ public interface Entities
             put(Character.valueOf((char) 8364), "&#8364;");
         }
     };
+    
+    public static String encode(String text, Map<Character, String> entities)
+    {
+        o(text);
+        char[] dst = new char[text.length()];
+        text.getChars(0, text.length(), dst, 0);
+        int i = 0;
+        for (char cn: dst)
+        {
+            String escaped = entities.get(Character.valueOf(cn));
+            if (escaped != null) {
+                //text.replace(i, i+1, escaped);
+                text = replaceCharAt(text, i, escaped);
+                i = i+(escaped.length());
+            } else {
+                i++;
+            }
+        }
+        return text;
+    }
+    
+    public static StringBuffer encode(StringBuffer text, Map<Character, String> entities)
+    {
+        char[] dst = new char[text.length()];
+        text.getChars(0, text.length(), dst, 0);
+        int i = 0;
+        for (char cn: dst)
+        {
+            String escaped = entities.get(Character.valueOf(cn));
+            if (escaped != null) {
+                text.replace(i, i+1, escaped);
+                i = i+(escaped.length());
+            } else {
+                i++;
+            }
+        }
+        return text;
+    }
 
+    private static String replaceCharAt(String s, int pos, String replacement) {
+        return s.substring(0,pos) + replacement + s.substring(pos+1);
+    }
+    
+    public static void o(String message)
+    {
+        if (message.contains("XXX")) {
+            System.out.println("E) "+message);
+        }
+    }
 }

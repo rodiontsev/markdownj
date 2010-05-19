@@ -284,19 +284,12 @@ public class TextEditor {
 
     public void htmlize(Map<Character, String> htmlEntities)
     {
-        char[] dst = new char[text.length()];
-        text.getChars(0, text.length(), dst, 0);
-        int i = 0;
-        for (char cn: dst)
-        {
-            String escaped = htmlEntities.get(Character.valueOf(cn));
-            if (escaped != null) {
-                text.replace(i, i+1, escaped);
-                i = i+(escaped.length());
-            } else {
-                i++;
-            }
-        }
+        o(String.format("htmlize %s", text.toString()));
+        text = Entities.encode(text, htmlEntities);
     }
-
+    
+    public static void o(String message)
+    {
+        if (message.contains("XXX")) System.out.println("T) "+message);
+    }
 }

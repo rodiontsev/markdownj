@@ -37,6 +37,7 @@ software, even if advised of the possibility of such damage.
 package com.petebevin.markdown;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -166,6 +167,7 @@ public class MarkdownProcessor {
     }
 
     public TextEditor runBlockGamut(TextEditor text) {
+        o(String.format("   runBlockGamut %s", text.toString()));
         doHeaders(text);
         doHorizontalRules(text);
         doLists(text);
@@ -293,6 +295,11 @@ public class MarkdownProcessor {
                 paragraphs[i] = decoded;
             } else {
                 paragraph = runSpanGamut(new TextEditor(paragraph)).toString();
+                o(String.format("   paragraph %s", paragraph));
+                if (htmlEntities != null) {
+                    paragraph = Entities.encode(paragraph, htmlEntities);
+                }
+                o(String.format("   paragraph %s", paragraph));
                 paragraphs[i] = "<p>" + paragraph + "</p>";
             }
         }
@@ -301,6 +308,7 @@ public class MarkdownProcessor {
 
 
     private TextEditor doAutoLinks(TextEditor markup) {
+        o(String.format("   doAutoLinks %s", markup.toString()));
         markup.replaceAll("<((https?|ftp):[^'\">\\s]+)>", "<a href=\"$1\">$1</a>");
         Pattern email = Pattern.compile("<([-.\\w]+\\@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)>");
         markup.replaceAll(email, new Replacement() {
@@ -437,7 +445,11 @@ public class MarkdownProcessor {
 
     private void encodeCode(TextEditor ed) {
         if (htmlEntities != null) {
-            ed.htmlize(htmlEntities);
+            HashMap<Character, String> entities = new HashMap<Character, String>(htmlEntities);
+            if (!entities.containsKey('&')) entities.put(Character.valueOf((char) 38), "&amp;");
+            if (!entities.containsKey('<')) entities.put(Character.valueOf((char) 60), "&lt;");
+            if (!entities.containsKey('>')) entities.put(Character.valueOf((char) 62), "&gt;");
+            ed.htmlize(entities);
         } else {
             ed.replaceAll("&", "&amp;");
             ed.replaceAll("<", "&lt;");
@@ -830,9 +842,6 @@ public class MarkdownProcessor {
      *
      */
     private TextEditor encodeAmpsAnglesAndEntities(TextEditor markup) {
-        if (htmlEntities != null) {
-            markup.htmlize(htmlEntities);
-        }
         // Ampersand-encoding based entirely on Nat Irons's Amputator MT plugin:
         // http://bumppo.net/projects/amputator/
         // Amputator is smart enough to ignore ampersands attached to existing entities
@@ -908,5 +917,10 @@ public class MarkdownProcessor {
     public void setHtmlEntities(Map<Character, String> htmlEntities)
     {
         this.htmlEntities = htmlEntities;
+    }
+    
+    public static void o(String message)
+    {
+        if (message.contains("XXX")) System.out.println("M) "+message);
     }
 }

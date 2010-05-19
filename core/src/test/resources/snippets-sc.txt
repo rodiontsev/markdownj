@@ -1,8 +1,8 @@
 # Test 1 (encode dash, greater than, and less than)
-Span-level HTML tags -- e.g. `<span>`, `<cite>`, or `<del>`
+Span-levèl HTML tags -- e.g. `<span>`, `<cite>`, or `<del>`
 
 # Result 1
-<p>Span-level HTML tags -- e.g. <code>&lt;span&gt;</code>, <code>&lt;cite&gt;</code>, or <code>&lt;del&gt;</code></p>
+<p>Span-lev&#232;l HTML tags -- e.g. <code>&lt;span&gt;</code>, <code>&lt;cite&gt;</code>, or <code>&lt;del&gt;</code></p>
 
 # Test 2 (newlines after H4 tags)
 #### Headers in blockquotes
@@ -19,10 +19,10 @@ Span-level HTML tags -- e.g. `<span>`, `<cite>`, or `<del>`
 </ul>
 
 # Test 3 (italic underscore)
-TODO - is _italic_underscore_ italic?
+TODO - is _itàlic_underscore_ itàlic?
 
 # Result 3
-<p>TODO - is <em>italic</em>underscore_ italic?</p>
+<p>TODO - is <em>it&#224;lic</em>underscore_ it&#224;lic?</p>
 
 # Test 4 (from syntax.textPane)
 Note that Markdown formatting syntax is not processed within block-level
@@ -51,7 +51,7 @@ Go to http://www.petebevin.com/ and poke around.
 
 <table>
  <tr>
- <td>Hello!</td>
+ <td>Hellò &amp; ciao</td>
  </tr>
 </table>
 
@@ -62,7 +62,7 @@ Wasn't that fun!
 
 <table>
  <tr>
- <td>Hello!</td>
+ <td>Hellò &amp; ciao</td>
  </tr>
 </table>
 
@@ -78,7 +78,7 @@ document should be publishable as-is, as plain text, without looking
 like it's been marked up with tags or formatting instructions. While
 Markdown's syntax has been influenced by several existing text-to-HTML
 filters -- including [Setext] [1], [atx] [2], [Textile] [3], [reStructuredText] [4],
-[Grutatext] [5], and [EtText] [6] -- the single biggest source of
+[Grutatext] [5], and [EtText] [6], and [Example] [7] -- the single biggest source of
 inspiration for Markdown's syntax is the format of plain text email.
 
   [1]: http://docutils.sourceforge.net/mirror/setext.html
@@ -87,6 +87,7 @@ inspiration for Markdown's syntax is the format of plain text email.
   [4]: http://docutils.sourceforge.net/rst.html
   [5]: http://www.triptico.com/software/grutatxt.html
   [6]: http://ettext.taint.org/doc/
+  [7]: http://example.tld/index?a=1&b=2
 
 # Result 7
 <h3 id="philosophy">Philosophy</h3>
@@ -98,22 +99,22 @@ document should be publishable as-is, as plain text, without looking
 like it's been marked up with tags or formatting instructions. While
 Markdown's syntax has been influenced by several existing text-to-HTML
 filters -- including <a href="http://docutils.sourceforge.net/mirror/setext.html">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/">atx</a>, <a href="http://textism.com/tools/textile/">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>,
-<a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a>, and <a href="http://ettext.taint.org/doc/">EtText</a> -- the single biggest source of
+<a href="http://www.triptico.com/software/grutatxt.html">Grutatext</a>, and <a href="http://ettext.taint.org/doc/">EtText</a>, and <a href="http://example.tld/index?a=1&amp;b=2">Example</a> -- the single biggest source of
 inspiration for Markdown's syntax is the format of plain text email.</p>
 
 # Test 8 (Backslash escapes)
-To this end, Markdown's syntax is comprised entirely of punctuation
+To this ènd, Markdown's syntax is comprised entirely of punctuation
 characters, which punctuation characters have been carefully chosen so
 as to look like what they mean. E.g., asterisks around a word actually
-look like \*emphasis\*. Markdown lists look like, well, lists. Even
+look like \*emphasis\* \*èmphàsìs\*. Markdown lists look like, well, lists. Even
 blockquotes look like quoted passages of text, assuming you've ever
 used email.
 
 # Result 8
-<p>To this end, Markdown's syntax is comprised entirely of punctuation
+<p>To this &#232;nd, Markdown's syntax is comprised entirely of punctuation
 characters, which punctuation characters have been carefully chosen so
 as to look like what they mean. E.g., asterisks around a word actually
-look like *emphasis*. Markdown lists look like, well, lists. Even
+look like *emphasis* *&#232;mph&#224;s&#236;s*. Markdown lists look like, well, lists. Even
 blockquotes look like quoted passages of text, assuming you've ever
 used email.</p>
 
@@ -163,14 +164,14 @@ For example, to add an HTML table to a Markdown article:
 This is another regular paragraph.
 </code></pre>
 
-# Test 12 (coded HTML with following paragraph)
+# Test 11 (coded HTML with following paragraph)
 For example, to add an HTML table to a Markdown article:
 
     This is a regular paragraph.
 
     <table>
         <tr>
-            <td>Foo</td>
+            <td>Fòò</td>
         </tr>
     </table>
 
@@ -178,14 +179,14 @@ For example, to add an HTML table to a Markdown article:
 
 This is not part of the code block.
 
-# Result 12
+# Result 11
 <p>For example, to add an HTML table to a Markdown article:</p>
 
 <pre><code>This is a regular paragraph.
 
 &lt;table&gt;
     &lt;tr&gt;
-        &lt;td&gt;Foo&lt;/td&gt;
+        &lt;td&gt;F&#242;&#242;&lt;/td&gt;
     &lt;/tr&gt;
 &lt;/table&gt;
 
@@ -194,11 +195,11 @@ This is another regular paragraph.
 
 <p>This is not part of the code block.</p>
 
-# Test 13 (code-quoted link definitions)
+# Test 12 (code-quoted link definitions)
 Because link names may contain spaces, this shortcut even works for
 multiple words in the link text:
 
-	Visit [Daring Fireball][] for more information.
+	Visit [Daring Firèball][] for moré information.
 
 And then define the link:
 
@@ -209,11 +210,11 @@ tend to put them immediately after each paragraph in which they're
 used, but if you want, you can put them all at the end of your
 document, sort of like footnotes.
 
-# Result 13
+# Result 12
 <p>Because link names may contain spaces, this shortcut even works for
 multiple words in the link text:</p>
 
-<pre><code>Visit [Daring Fireball][] for more information.
+<pre><code>Visit [Daring Fir&#232;ball][] for mor&#233; information.
 </code></pre>
 
 <p>And then define the link:</p>
@@ -226,39 +227,39 @@ tend to put them immediately after each paragraph in which they're
 used, but if you want, you can put them all at the end of your
 document, sort of like footnotes.</p>
 
-# Test 14 (HTML inside code backticks)
-The only restrictions are that block-level HTML elements -- e.g. `<div>`,
+# Test 13 (HTML inside code backticks)
+The only restrictions are that block-level HTML elements -- e.g. `fòò & bàr!`,
 `<table>`, `<pre>`, `<p>`, etc. -- must be separated from surrounding
 content by blank lines, and the start and end tags of the block should
 not be indented with tabs or spaces. Markdown is smart enough not
 to add extra (unwanted) `<p>` tags around HTML block-level tags.
 
-# Result 14
-<p>The only restrictions are that block-level HTML elements -- e.g. <code>&lt;div&gt;</code>,
+# Result 13
+<p>The only restrictions are that block-level HTML elements -- e.g. <code>f&#242;&#242; &amp; b&#224;r!</code>,
 <code>&lt;table&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;p&gt;</code>, etc. -- must be separated from surrounding
 content by blank lines, and the start and end tags of the block should
 not be indented with tabs or spaces. Markdown is smart enough not
 to add extra (unwanted) <code>&lt;p&gt;</code> tags around HTML block-level tags.</p>
 
 
-# Test 15 (block code with backrefs and language detection)
-This is a normal paragraph.
+# Test 14 (block code and paragraph)
+This is a normal paràgraph.
 
     lang:java
     package com.petebevin.markdown;
-
+    // còmment
     import java.util.regex.Matcher;
 
     public interface Replacement {
         String replacement(Matcher m);
     }
 
-# Result 15
-<p>This is a normal paragraph.</p>
+# Result 14
+<p>This is a normal par&#224;graph.</p>
 
 <pre class="java">
 package com.petebevin.markdown;
-
+// c&#242;mment
 import java.util.regex.Matcher;
 
 public interface Replacement {
@@ -267,41 +268,19 @@ public interface Replacement {
 </pre>
 
 
-# Test 16 (block code with language detection; edge case: spaces)
+
+# Test 15 (block code with language detection; edge case: empty lang)
 This is a normal paragraph.
 
-    lang:   java
-    This is a $4 preformatted
+    làng:
+    This is a $4 preformàtted
     code block.
 
-# Result 16
+# Result 15
 <p>This is a normal paragraph.</p>
 
-<pre class="java">
-This is a $4 preformatted
-code block.
-</pre>
-
-
-# Test 17 (block code with language detection; edge case: empty lang)
-This is a normal paragraph.
-
-    lang:
-    This is a $4 preformatted
-    code block.
-
-# Result 17
-<p>This is a normal paragraph.</p>
-
-<pre><code>lang:
-This is a $4 preformatted
+<pre><code>l&#224;ng:
+This is a $4 preform&#224;tted
 code block.
 </code></pre>
-
-
-# Test 18 (html entities default behaviour)
-This ààà, no substitutions
-
-# Result 18
-<p>This ààà, no substitutions</p>
 
