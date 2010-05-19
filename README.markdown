@@ -13,10 +13,10 @@ Differences:
   
   * You can set the additional characters you want escaped in the html rendering.
 
-To build the last milestone (from commits to May 17 2010):
+To build the last milestone (from commits to May 19 2010):
 
     git clone git://github.com/enr/markdownj.git
-    git checkout 0.4.M20100517
+    git checkout 0.4.M20100519
     mvn clean install
     
 Now you can use the library adding to your pom.xml:
@@ -24,7 +24,7 @@ Now you can use the library adding to your pom.xml:
     <dependency>
       <groupId>com.github.enr.markdownj</groupId>
       <artifactId>markdownj-core</artifactId>
-      <version>0.4.M20100517</version>
+      <version>0.4.M20100519</version>
     </dependency>
 
 
