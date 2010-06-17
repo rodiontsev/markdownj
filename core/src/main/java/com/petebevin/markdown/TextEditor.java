@@ -38,7 +38,6 @@ package com.petebevin.markdown;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -280,11 +279,6 @@ public class TextEditor {
      */
     public boolean isEmpty() {
         return text.length() == 0;
-    }
-
-    public void htmlize(Map<Character, String> htmlEntities)
-    {
-        text = Entities.encode(text, htmlEntities);
     }
 
 }

@@ -169,3 +169,9 @@ Violets are blue.
 <p>Roses are red, <br />
 Violets are blue.</p>
 
+
+# Test 15 (Special chars)
+àèìòù ç
+
+# Result 15
+<p>àèìòù ç</p>

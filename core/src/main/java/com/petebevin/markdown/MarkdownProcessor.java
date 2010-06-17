@@ -37,7 +37,6 @@ software, even if advised of the possibility of such damage.
 package com.petebevin.markdown;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.TreeMap;
@@ -74,12 +73,6 @@ public class MarkdownProcessor {
      */
     private static final String DEFAULT_CODE_BLOCK_TEMPLATE = "\n\n<pre class=\"%s\">\n%s\n</pre>\n\n";
     private String codeBlockTemplate = DEFAULT_CODE_BLOCK_TEMPLATE;
-    
-    /**
-     * A map of values to be replaced in html transformation.
-     * The key is the char, the value the string to use in replacement, ie '�' : '&agrave;'.
-     */
-    private Map<Character, String> htmlEntities;
 
     /**
      * Creates a new Markdown processor.
@@ -294,9 +287,6 @@ public class MarkdownProcessor {
                 paragraphs[i] = decoded;
             } else {
                 paragraph = runSpanGamut(new TextEditor(paragraph)).toString();
-                if (htmlEntities != null) {
-                    paragraph = Entities.encode(paragraph, htmlEntities);
-                }
                 paragraphs[i] = "<p>" + paragraph + "</p>";
             }
         }
@@ -440,17 +430,9 @@ public class MarkdownProcessor {
     }
 
     private void encodeCode(TextEditor ed) {
-        if (htmlEntities != null) {
-            HashMap<Character, String> entities = new HashMap<Character, String>(htmlEntities);
-            if (!entities.containsKey('&')) entities.put(Character.valueOf((char) 38), "&amp;");
-            if (!entities.containsKey('<')) entities.put(Character.valueOf((char) 60), "&lt;");
-            if (!entities.containsKey('>')) entities.put(Character.valueOf((char) 62), "&gt;");
-            ed.htmlize(entities);
-        } else {
-            ed.replaceAll("&", "&amp;");
-            ed.replaceAll("<", "&lt;");
-            ed.replaceAll(">", "&gt;");
-        }
+        ed.replaceAll("&", "&amp;");
+        ed.replaceAll("<", "&lt;");
+        ed.replaceAll(">", "&gt;");
         ed.replaceAll("\\*", CHAR_PROTECTOR.encode("*"));
         ed.replaceAll("_", CHAR_PROTECTOR.encode("_"));
         ed.replaceAll("\\{", CHAR_PROTECTOR.encode("{"));
@@ -904,15 +886,4 @@ public class MarkdownProcessor {
             System.exit(1);
         }
     }
-
-    public Map<Character, String> getHtmlEntities()
-    {
-        return htmlEntities;
-    }
-
-    public void setHtmlEntities(Map<Character, String> htmlEntities)
-    {
-        this.htmlEntities = htmlEntities;
-    }
-
 }
