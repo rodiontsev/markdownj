@@ -11,8 +11,6 @@ Differences:
 
   * You can set the code-block template in MarkdownProcessor.
   
-  * You can set the additional characters you want escaped in the html rendering.
-
 To build the last milestone (from commits to May 19 2010):
 
     git clone git://github.com/enr/markdownj.git
