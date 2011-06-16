@@ -40,7 +40,7 @@ software, even if advised of the possibility of such damage.
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.madgag</groupId>
     <artifactId>markdownj-core</artifactId>
-    <version>0.4.1-SNAPSHOT</version>
+    <version>0.4.1</version>
     <packaging>jar</packaging>
     <name>MarkdownJ Core</name>
     <description>Core functionality provided by MarkdownJ.</description>
