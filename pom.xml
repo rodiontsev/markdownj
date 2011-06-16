@@ -32,23 +32,17 @@ negligence or otherwise) arising in any way out of the use of this
 software, even if advised of the possibility of such damage.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.madgag</groupId>
-	<version>0.4.0-SNAPSHOT</version>
-
-    <packaging>jar</packaging>
-
+    <groupId>com.madgag</groupId>
     <artifactId>markdownj-core</artifactId>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+    <version>0.4.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>MarkdownJ Core</name>
     <description>Core functionality provided by MarkdownJ.</description>
+    <url>https://github.com/rtyley/markdownj</url>
     <licenses>
         <license>
             <name>New BSD License</name>
@@ -56,14 +50,38 @@ software, even if advised of the possibility of such damage.
             <distribution>repo</distribution>
         </license>
     </licenses>
-<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.8.2</version>
-			<scope>test</scope>
-		</dependency>
-</dependencies>
+    <scm>
+        <connection>scm:git:git@github.com:rtyley/markdownj.git</connection>
+        <developerConnection>scm:git:git@github.com:rtyley/markdownj.git</developerConnection>
+        <url>git@github.com:rtyley/markdownj.git</url>
+    </scm>
+    <developers>
+        <developer>
+            <id>rtyley</id>
+            <name>Roberto Tyley</name>
+            <timezone>0</timezone>
+            <url>https://github.com/rtyley</url>
+        </developer>
+        <developer>
+            <id>enr</id>
+            <url>https://github.com/enr</url>
+        </developer>
+        <developer>
+            <id>myabc</id>
+            <url>https://github.com/myabc</url>
+        </developer>
+    </developers>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
