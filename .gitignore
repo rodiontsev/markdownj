@@ -8,3 +8,7 @@ profiles.xml
 target
 *~
 *#
+.idea/
+*.iml
+*.ipr
+*.iws
