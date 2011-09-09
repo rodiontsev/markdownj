@@ -599,18 +599,34 @@ public class MarkdownProcessor {
 
     private TextEditor doHeaders(TextEditor markup) {
         // setext-style headers
-        markup.replaceAll("^(.*)\n====+$", "<h1>$1</h1>");
-        markup.replaceAll("^(.*)\n----+$", "<h2>$1</h2>");
+        Pattern firstLevelHeader = Pattern.compile("^(.*)\n====+$", Pattern.MULTILINE);
+        markup.replaceAll(firstLevelHeader, new Replacement() {
+            public String replacement(Matcher m) {
+                TextEditor heading = new TextEditor(m.group(1));
+                heading = runSpanGamut(heading);
+                return "<h1>" + heading.trim().toString() + "</h1>";
+            }
+        });
+
+        Pattern secondLevelHeader = Pattern.compile("^(.*)\n----+$", Pattern.MULTILINE);
+        markup.replaceAll(secondLevelHeader, new Replacement() {
+            public String replacement(Matcher m) {
+                TextEditor heading = new TextEditor(m.group(1));
+                heading = runSpanGamut(heading);
+                return "<h2>" + heading.trim().toString() + "</h2>";
+            }
+        });
 
         // atx-style headers - e.g., "#### heading 4 ####"
         Pattern p = Pattern.compile("^(#{1,6})\\s*(.*?)\\s*\\1?$", Pattern.MULTILINE);
         markup.replaceAll(p, new Replacement() {
             public String replacement(Matcher m) {
                 String marker = m.group(1);
-                String heading = m.group(2);
+                TextEditor heading = new TextEditor(m.group(2));
+                heading = runSpanGamut(heading);
                 int level = marker.length();
                 String tag = "h" + level;
-                return "<" + tag + ">" + heading + "</" + tag + ">\n";
+                return "<" + tag + ">" + heading.trim().toString() + "</" + tag + ">\n";
             }
         });
         return markup;

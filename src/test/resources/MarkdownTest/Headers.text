@@ -1,0 +1,51 @@
+<h1>Headers</h1>
+
+This is an H1
+=============
+
+This is an H2
+-------------
+
+# This is an H1
+
+## This is an H2
+
+###### This is an H6
+
+# This is an H1 #
+
+## This is an H2 ##
+
+### This is an H3 ###
+
+<h1>Link in headers</h1>
+
+This is an H1 with a [link](http://www.example.com)
+============================================
+
+This is an H2 with a [link](http://www.example.com)
+--------------------------------------------
+
+# This is an H1 with a [link](http://www.example.com)
+
+## This is an H2 with a [link](http://www.example.com)
+
+###### This is an H6 with a [link](http://www.example.com)
+
+# This is an H1 with a [link](http://www.example.com)#
+
+## This is an H2 with a [link](http://www.example.com)##
+
+### This is an H3 with a [link](http://www.example.com)###
+
+[1]: http://www.example.com
+
+This is an H1 with a [link][1]
+============================================
+
+This is an H2 with a [link][1]
+--------------------------------------------
+
+# This is an H1 with a [link][1]
+
+## This is an H2 with a [link][1]
